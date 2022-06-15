@@ -24,7 +24,7 @@
  * limitations under the License.
  * #L%
  */
-module com.pi4j.example {
+module visual_classes {
     // Pi4J MODULES
     requires com.pi4j;
     requires com.pi4j.plugin.pigpio;
@@ -39,5 +39,5 @@ module com.pi4j.example {
     uses com.pi4j.provider.Provider;
 
     // allow access to classes in the following namespaces for Pi4J annotation processing
-    opens com.pi4j.example to com.pi4j;
+    opens visual_classes to com.pi4j;
 }

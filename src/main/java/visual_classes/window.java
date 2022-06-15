@@ -27,11 +27,11 @@ public class window extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public void SetWindow() {
+	public static void main(String[] args) {
 		//System.out.println("hola mundo");
 		//System.out.println(this.getClass().getResource("/principal_toques.png"));
-		testGpio();
-		/*
+		//testGpio();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -41,7 +41,7 @@ public class window extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});
 	}
 	
 	public static void testGpio() {

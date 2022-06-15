@@ -55,8 +55,4 @@ public class MinimalExample {
      * @param args an array of {@link java.lang.String} objects.
      * @throws java.lang.Exception if any.
      */
-    public static void main(String[] args) throws Exception {
-        window win = new window();
-        win.SetWindow();
-    }
 }

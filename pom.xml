@@ -127,7 +127,7 @@
                         <argument>--module-path</argument>
                         <argument>${project.build.directory}/distribution</argument>
                         <argument>--module</argument>
-                        <argument>com.pi4j.example/com.pi4j.example.MinimalExample</argument>
+                        <argument>visual_classes/visual_classes.window</argument>
                     </arguments>
                 </configuration>
             </plugin>
