@@ -67,8 +67,10 @@ public class MainPane extends JPanelBackground {
 	//private boolean keyboardOn = true;
 	JLabel l;
 	MouseAdapter updateAdapter;
+	//GpioComm gpio = new GpioComm();
 	
 	public MainPane(JFrame f) {
+		//System.out.println(gpio.PIN_LED);
 		frame = f;
 		sizeSetting();
 		add(executionTimePane);

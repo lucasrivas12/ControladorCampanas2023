@@ -22,24 +22,24 @@ public class window extends JFrame {
 	osChange os = new osChange();
 	MainPane mainPane; 
 	private JPanel contentPane;
-	private static GpioComm gpio = new GpioComm(); //For test
+	//private static GpioComm gpio = new GpioComm(); //For test
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		//System.out.println("hola mundo");
-		//System.out.println(this.getClass().getResource("/principal_toques.png"));
-		//gpio.shutdown();
-		try {
+		//System.out.println(gpio.PIN_LED);
+		//gpio.PIN_LED = 56;
+
+		/*try {
 			
 			testGpio();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		//gpio.GpioTest();
-		/*EventQueue.invokeLater(new Runnable() {
+		}*/
+
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					window frame = new window();
@@ -48,27 +48,41 @@ public class window extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});*/
+		});
 	}
 	
-	public static void testGpio() throws InterruptedException {
-		gpio.init();
-		/*for(int i=0;i<5;i++){
-			gpio.setPulse("TA",500);
-			Thread.sleep(1000);
-		}*/
-		 TimerTask repeatedTask = new TimerTask() {
+	/*public static void testGpio() throws InterruptedException {
+		
+		TimerTask task = new TimerTask() {
 		        public void run() {
 		        	//gpio.setPulse("TA",1000);
-					gpio.setToggle("BC");
+					GpioComm g2 = new GpioComm();
+					g2.initPin(23);
+					g2.setHigh("TA");
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					g2.setLow("TA");
+					//g2.shutdown();
 		        }
 		 };
 		 Timer timer = new Timer("Timer");
 		
 		long period = 2000L;
-		long delay = 1000L;
-		timer.scheduleAtFixedRate(repeatedTask, delay, period);
-	}
+		long delay = 6000L;
+		timer.schedule(task, delay);
+
+		gpio.initPin(24);
+		for(int i=0;i<5;i++){
+			gpio.setPulse("BB",500);
+			Thread.sleep(3000);
+		}
+		gpio.shutdown();
+		
+	}*/
 
 	/**
 	 * Create the frame.
@@ -82,24 +96,6 @@ public class window extends JFrame {
 		//System.out.println(screenSize);
 		int screenWidth = (int)screenSize.getWidth();
 		int screenHeight = (int)screenSize.getHeight();
-		
-		
-		/*String directionCmd = "cd /home/pi/mu_code";
-		String openFileCmd = "python3 ledtest.py";
-		String tmp;
-		String s = new String();
-		Process p;
-
-		try{
-			p = Runtime.getRuntime().exec(openFileCmd);
-			BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
-			while((tmp = br.readLine()) != null)
-				System.out.println("[LINE]: " + tmp);
-				s += tmp + "\n";
-			p.waitFor();
-			System.out.println("[EXIT]: "+p.exitValue());
-			p.destroy();
-		} catch(Exception e){}*/
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 676, 628);

@@ -42,6 +42,7 @@ visual_classes/ChangePasswordPanel$3.class
 visual_classes/MainPane$2.class
 com/pi4j/example/PrintInfo.class
 useful_classes/Movement.class
+visual_classes/window$2.class
 visual_classes/MainPane$1.class
 useful_classes/MenuAtributes.class
 visual_classes/ExecutionTypePanel.class
