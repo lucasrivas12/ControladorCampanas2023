@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 //import com.pi4j.*;
 
 public class GpioComm {
-    public static int PIN_LED = 22; // PIN 15 = BCM 22
+    public static boolean finished = false;
 
 	static DigitalState initialState = DigitalState.HIGH;
 	static DigitalState shotdownState = DigitalState.HIGH;
@@ -41,6 +41,24 @@ public class GpioComm {
 	static DigitalOutput io25;
 	static DigitalOutput io27;
 
+	public void initAll(){
+		var config = DigitalOutput.newConfigBuilder(pi4j)
+                .shutdown(shotdownState)
+                .initial(initialState)
+                .provider("pigpio-digital-output");
+
+		io4 = pi4j.create(config.address(4));
+		io5 = pi4j.create(config.address(5));
+		io6 = pi4j.create(config.address(6));
+		io12 = pi4j.create(config.address(12));
+		io17 = pi4j.create(config.address(17));
+		io18 = pi4j.create(config.address(18));
+		io22 = pi4j.create(config.address(22));
+		io23 = pi4j.create(config.address(23));
+		io24 = pi4j.create(config.address(24));
+		io25 = pi4j.create(config.address(25));
+		io27 = pi4j.create(config.address(27));
+	}
 	public void initPin(int pin){
 		System.out.print("Started: ");
 		System.out.println(pi4j);
@@ -184,6 +202,7 @@ public class GpioComm {
 	}
 	
 	public void shutdown() {
+		finished = true;
 		pi4j.shutdown();
 		System.out.print("After shutdown: ");
 		System.out.println(pi4j);

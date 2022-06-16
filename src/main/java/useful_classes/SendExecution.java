@@ -218,16 +218,9 @@ public class SendExecution {
 	
 	public void buttonStopBellExecution() {
 		if(bellExecution) {
-			//byte[] byteArrray = new byte[1];
-			//byteArrray[0] = 's';
-			bellExecution = false; //
+			bellExecution = false;
         	main.principalPane.placeBtns(false);
         	executionHandler.stopExecution();
-			//System.out.println(byteArrray[0]);
-			//arduinoVerify(byteArrray);
-			//arduinoPort.writeBytes(byteArrray,byteArrray.length);
-			//arduinoVerify();
-			//testTimer(2000);
 		}
 	}
 	

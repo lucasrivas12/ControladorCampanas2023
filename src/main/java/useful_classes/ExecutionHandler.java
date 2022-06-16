@@ -8,24 +8,22 @@ import java.util.regex.Pattern;
 
 
 public class ExecutionHandler {
-	private ArrayList<String> fileData = new ArrayList();
 	private GpioComm gpio = new GpioComm();
 	private String[] executionLines;
 	private Pattern toquePattern = Pattern.compile("([ABC])(\\d{6})");
 	private Pattern bandeoPattern = Pattern.compile("([ABC])(\\d{6})#(\\d{6})");
 	boolean isToques;
-	private Thread exe_thread;
 	private ArrayList<Timer> timer = new ArrayList();
+
+	public ExecutionHandler(){
+		ground(true);
+	}
 	private void setExecutionLines(String[] executionLines){
 		this.executionLines = executionLines;
 	}
 	
 	private void defineType() {
 		isToques = executionLines[0].equals("t");
-	}
-	
-	private void playingToques() {
-		
 	}
 	
 	private void newNote(String note,long delay,int duration) {
@@ -59,8 +57,15 @@ public class ExecutionHandler {
 	public void playExecution(String[] executionLines) {
 		setExecutionLines(executionLines);
 		defineType();
+		if(isToques)
+			playToques();
+		else
+			playBandeo();
+	}
+
+	private void playToques(){
+		char executionType = 'T';
 		int delay = 0;
-		char executionType = isToques? 'T':'B';
 		for(int i=1;i<executionLines.length-1;i++) {
 			Matcher match = toquePattern.matcher(executionLines[i]);
 			match.find();
@@ -68,6 +73,20 @@ public class ExecutionHandler {
 			delay += mili;
 			String note = executionType + match.group(1);
 			newNote(note,delay);
+		}
+	}
+
+	private void playBandeo(){
+		char executionType = 'B';
+		int delay = 0;
+		for(int i=1;i<executionLines.length-1;i++) {
+			Matcher match = bandeoPattern.matcher(executionLines[i]);
+			match.find();
+			int mili = Integer.parseInt(match.group(2));
+			int duration = Integer.parseInt(match.group(3));
+			delay += mili;
+			String note = executionType + match.group(1);
+			newNote(note,delay,duration);
 		}
 	}
 	

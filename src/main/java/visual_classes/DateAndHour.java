@@ -223,11 +223,11 @@ public class DateAndHour extends JPanel {
 					//arduinoClockPulseDaley(30);
 					main.sendExecution.clockPulseA();
 	        		
-	        		if(texto_hora.equals("06:05 p.m.") && !backlight) {
+	        		if(texto_hora.equals("06:00 p.m.") && !backlight) {
 	        			main.sendExecution.backlightOn();
 	        			backlight = !backlight;
 	        		}
-	        		else if(texto_hora.equals("06:05 a.m.") && backlight) {
+	        		else if(texto_hora.equals("06:00 a.m.") && backlight) {
 	        			main.sendExecution.backlightOff();
 	        			backlight = !backlight;
 	        		}
