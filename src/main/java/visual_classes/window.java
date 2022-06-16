@@ -30,9 +30,16 @@ public class window extends JFrame {
 	public static void main(String[] args) {
 		//System.out.println("hola mundo");
 		//System.out.println(this.getClass().getResource("/principal_toques.png"));
-		//testGpio();
-		
-		EventQueue.invokeLater(new Runnable() {
+		//gpio.shutdown();
+		try {
+			
+			testGpio();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//gpio.GpioTest();
+		/*EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					window frame = new window();
@@ -41,22 +48,26 @@ public class window extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		});*/
 	}
 	
-	public static void testGpio() {
-		gpio.GpioTest();
-		 /*TimerTask repeatedTask = new TimerTask() {
+	public static void testGpio() throws InterruptedException {
+		gpio.init();
+		/*for(int i=0;i<5;i++){
+			gpio.setPulse("TA",500);
+			Thread.sleep(1000);
+		}*/
+		 TimerTask repeatedTask = new TimerTask() {
 		        public void run() {
 		        	//gpio.setPulse("TA",1000);
-					gpio.setToggle("TA");
+					gpio.setToggle("BC");
 		        }
 		 };
 		 Timer timer = new Timer("Timer");
 		
-		long period = 3000L;
+		long period = 2000L;
 		long delay = 1000L;
-		timer.scheduleAtFixedRate(repeatedTask, delay, period);*/
+		timer.scheduleAtFixedRate(repeatedTask, delay, period);
 	}
 
 	/**
