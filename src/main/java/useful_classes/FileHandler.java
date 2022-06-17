@@ -10,7 +10,7 @@ import java.io.IOException;  // Import the IOException class to handle errors
 public class FileHandler {
 	boolean debug = false;
 	private String filename;
-	private String direction = "";
+	private String direction = "/home/pi/controller-ui/target/classes/";
 	
 	public void setFilename(String name) {
 		filename = direction+name;
@@ -31,9 +31,9 @@ public class FileHandler {
 	public void setDirection(String name) {
 		String base = "src/main/java/";
 		//direction = base+name+"/";
-		direction = "";
-		if(name.equals("sav"))
-			direction = "classes/";
+		//direction = "";
+		//if(name.equals("sav"))
+		//	direction = "classes/";
 	}
 
 	public String getFilePath(){

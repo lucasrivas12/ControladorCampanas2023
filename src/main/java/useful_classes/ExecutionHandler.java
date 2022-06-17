@@ -16,6 +16,7 @@ public class ExecutionHandler {
 	private ArrayList<Timer> timer = new ArrayList();
 
 	public ExecutionHandler(){
+		gpio.initAll();
 		ground(true);
 	}
 	private void setExecutionLines(String[] executionLines){
