@@ -25,7 +25,6 @@ public class SendExecution {
 	Timer timer;
 	Timer executionTimer;
 	public boolean okMessage = false;
-	//private boolean waitingForArduino = false;
 	ExecutionDurationHandler executionDurationHandler;
 	public boolean playPrev = true;
 	ExecutionHandler executionHandler = new ExecutionHandler();
@@ -172,8 +171,10 @@ public class SendExecution {
 		
 	private void playExecution() {
 		String[] fileLines;
+		int duration;
 		fileLines = fl.readFileLine();
-		executionHandler.playExecution(fileLines);
+		duration = executionHandler.playExecution(fileLines);
+		executionFinished(duration);
 	}
 	
 	public void playSong() throws FileNotFoundException, JavaLayerException {
@@ -216,41 +217,31 @@ public class SendExecution {
 	       }.start();      
 	}
 	
-	public void buttonStopBellExecution() {
+	public void stopBellExecution() {
 		if(bellExecution) {
 			bellExecution = false;
         	main.principalPane.placeBtns(false);
         	executionHandler.stopExecution();
 		}
 	}
-	
-	public void stopBellExecution() {
-		bellExecution = false; //
-    	main.principalPane.placeBtns(false);
-    	executionHandler.stopExecution();
-        /*if(bellExecution) {
-			arduinoVerify();
-		}*/
+
+	public void executionFinished(){
+		bellExecution = false;
+        main.principalPane.placeBtns(false);
 	}
 	
-	/*public void startTimer(long mili) {
+	public void executionFinished(long mili) {
 	    TimerTask task = new TimerTask() {
 	        public void run() {
-	            if(okMessage) {
-	            	okMessage = false;
-	            	System.out.println("Arduino says ok");
-	            }
-	            else {
-	            	System.out.println("Reseting arduino");
-	            	main.resetArduino();
-	            }
-	        }
+				bellExecution = false;
+        		main.principalPane.placeBtns(false);
+			}
 	    };
 	    timer = new Timer("Timer");
 	    
 	    long delay = mili;
 	    timer.schedule(task, delay);
-	}*/
+	}
 	
 	public void clockPulseA() {
 		executionHandler.clockPulseA();
@@ -265,8 +256,6 @@ public class SendExecution {
 	}
 	
 	public void stopSong() {
-		//System.out.println("entré ");
-		System.out.print(playSong);
 		if(playSong) {
 			playSong = false;
 			musicFilePlayer.close();

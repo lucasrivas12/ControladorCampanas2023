@@ -26,9 +26,7 @@ public class ExecutionDurationHandler {
 		for(int i=1;i<exectutionLines.length-1;i++) {
 			Matcher match = toquePattern.matcher(exectutionLines[i]);
 			match.find();
-			//System.out.println(match.group(1));
 			int mili = Integer.parseInt(match.group(1));
-			//System.out.println(mili);
 			executionMili += mili;
 		}
 	}
@@ -42,7 +40,6 @@ public class ExecutionDurationHandler {
 			int miliDuration = Integer.parseInt(match.group(2));
 			aux += miliWait;
 			executionMili = Math.max(executionMili,aux + miliDuration);
-			//System.out.println(executionMili);
 		}
 	}
 	

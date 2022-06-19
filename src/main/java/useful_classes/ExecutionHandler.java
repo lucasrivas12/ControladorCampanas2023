@@ -12,8 +12,10 @@ public class ExecutionHandler {
 	private String[] executionLines;
 	private Pattern toquePattern = Pattern.compile("([ABC])(\\d{6})");
 	private Pattern bandeoPattern = Pattern.compile("([ABC])(\\d{6})#(\\d{6})");
-	boolean isToques;
+	private boolean isToques;
 	private ArrayList<Timer> timer = new ArrayList();
+	private int executionDuration;
+	private int extraDuration = 400;
 
 	public ExecutionHandler(){
 		gpio.initAll();
@@ -53,15 +55,27 @@ public class ExecutionHandler {
 			timer.forEach((t) -> t.cancel());
 			timer.forEach((t) -> t.purge());
 		}
+		if (isToques){
+			gpio.setLow("TA");
+			gpio.setLow("TB");
+			gpio.setLow("TC");
+		} else {
+			gpio.setLow("BA");
+			gpio.setLow("BB");
+			gpio.setLow("BC");
+		}
+		
 	}
 	
-	public void playExecution(String[] executionLines) {
+	public int playExecution(String[] executionLines) {
+		executionDuration = 0;
 		setExecutionLines(executionLines);
 		defineType();
 		if(isToques)
 			playToques();
 		else
 			playBandeo();
+		return executionDuration+extraDuration;
 	}
 
 	private void playToques(){
@@ -75,6 +89,7 @@ public class ExecutionHandler {
 			String note = executionType + match.group(1);
 			newNote(note,delay);
 		}
+		executionDuration = delay;
 	}
 
 	private void playBandeo(){
@@ -88,6 +103,7 @@ public class ExecutionHandler {
 			delay += mili;
 			String note = executionType + match.group(1);
 			newNote(note,delay,duration);
+			executionDuration = Math.max(executionDuration,delay + duration);
 		}
 	}
 	

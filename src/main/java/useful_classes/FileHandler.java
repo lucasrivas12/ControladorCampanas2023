@@ -18,13 +18,13 @@ public class FileHandler {
 		String filePath = getClass().getResource("/"+name).toString();
 		if(filePath.startsWith("file:")){
 			filename = filePath.substring(5);
-			System.out.println("full path: "+filePath);
-			System.out.println("filename: "+filename);
+			//System.out.println("full path: "+filePath);
+			//System.out.println("filename: "+filename);
 		} else if(filePath.startsWith("jar:file:")){
 			filename = filePath.substring(9);
 			filename = "/home/pi/controller-ui/target/classes/"+name;
-			System.out.println("full path: "+filePath);
-			System.out.println("filename: "+filename);
+			//System.out.println("full path: "+filePath);
+			//System.out.println("filename: "+filename);
 		}
 	}
 	
