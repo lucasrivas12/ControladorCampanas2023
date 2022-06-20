@@ -15,7 +15,7 @@ public class ExecutionHandler {
 	private boolean isToques;
 	private ArrayList<Timer> timer = new ArrayList();
 	private int executionDuration;
-	private int extraDuration = 400;
+	private int extraDuration = 200;
 
 	public ExecutionHandler(){
 		gpio.initAll();
@@ -89,7 +89,7 @@ public class ExecutionHandler {
 			String note = executionType + match.group(1);
 			newNote(note,delay);
 		}
-		executionDuration = delay;
+		executionDuration = delay + 1000;
 	}
 
 	private void playBandeo(){

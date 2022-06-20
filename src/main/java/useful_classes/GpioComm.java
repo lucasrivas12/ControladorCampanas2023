@@ -176,7 +176,7 @@ public class GpioComm {
 		else
 			selectPin(sys_pin).high();
 
-		System.out.println(sys_pin+" is high");
+		//System.out.println(sys_pin+" is high");
 	}
 	
 	public void setLow(String sys_pin) {
@@ -184,12 +184,12 @@ public class GpioComm {
 			selectPin(sys_pin).high();
 		else
 			selectPin(sys_pin).low();
-		System.out.println(sys_pin+" is low");
+		//System.out.println(sys_pin+" is low");
 	}
 	
 	public void setToggle(String sys_pin) {
 		selectPin(sys_pin).toggle();
-		System.out.println(sys_pin+" toogle");
+		//System.out.println(sys_pin+" toogle");
 	}
 	
 	public void setPulse(String sys_pin, int miliseconds) {
@@ -198,7 +198,7 @@ public class GpioComm {
 		else
 			selectPin(sys_pin).pulseHigh(miliseconds, TimeUnit.MILLISECONDS);
 		
-		System.out.println(sys_pin+" "+miliseconds+" pulse");
+		//System.out.println(sys_pin+" "+miliseconds+" pulse");
 	}
 	
 	public void shutdown() {

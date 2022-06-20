@@ -66,6 +66,7 @@ visual_classes/SelectDayHourPanel.class
 visual_classes/VirtualKeyboard$1.class
 visual_classes/PrincipalPanel$10.class
 visual_classes/ExecutionTimePanel$4.class
+useful_classes/SendExecution$3.class
 useful_classes/SendExecution.class
 visual_classes/SelectExecutionPanel$2.class
 visual_classes/ChangePasswordPanel$6.class
