@@ -36,14 +36,11 @@ public class VirtualNumberKeyboard  extends JPanel{
     int textSize = 50;
 	private int rowY = 0;
 	private int alpha = 255;
-	private JPanel keyPanel;
 	private JLabel[] hourData = new JLabel[3];
 	int select=0;
 	private String dataBuffer="";
 	private JPanel parent;
-	private String[] section = new String[] {
-			"a.m","p.m."
-	};
+
 	osChange os = new osChange();
     /**
      * Private class for storing key specification.
@@ -76,8 +73,6 @@ public class VirtualNumberKeyboard  extends JPanel{
     private String[] row4 = new String[]{
     		LEFT_ARROW,"0",RIGHT_ARROW,READY
     };
-
-    private Color defaultColor;
 
     public VirtualNumberKeyboard() {
     	Dimension screenSize = os.setDimension();
@@ -156,9 +151,6 @@ public class VirtualNumberKeyboard  extends JPanel{
             JButton button;
             button = new JButton(key);
             int lineThickness = 2;
-            Color btnLineColor = getColorWithAlpha(Color.WHITE);
-            Color btnColor = getColorWithAlpha(Color.BLACK);
-            Color btnTextColor = getColorWithAlpha(Color.WHITE);
             button.setBorder(new MatteBorder(lineThickness, lineThickness, lineThickness, lineThickness, (Color) Color.WHITE));
             button.setForeground(Color.WHITE);
             button.setBackground(new Color(0,0,0,255));

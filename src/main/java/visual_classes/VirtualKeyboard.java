@@ -38,7 +38,6 @@ import useful_classes.osChange;
 public class VirtualKeyboard  extends JPanel implements FocusListener{
 	private int rowY = 0;
 	private int alpha = 255;
-	private JPanel keyPanel;
 	public int defaultHeight = 350;
 	osChange os = new osChange();
 	int finalHeight;

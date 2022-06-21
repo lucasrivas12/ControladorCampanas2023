@@ -1,10 +1,8 @@
 package visual_classes;
 
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.MouseInfo;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -295,27 +293,13 @@ public class PrincipalPanel extends JPanel {
 		cambiarContrasenaBtn.setContentAreaFilled(false);
 		cambiarContrasenaBtn.setBounds(buttonsX, cambiarContrasenaY, buttonsWidth, buttonsHeight);
 		add(cambiarContrasenaBtn);
-		
-		/*playPrevX = 740;//screenWidth - (this.main.squareButtonHorizontalGap - this.main.squareButtonSize)*2;
-		playPrevY = 458;//this.main.squareButtonVerticalGap;
-		playPrevIco = new ImageIcon(playPrevIco.getImage().getScaledInstance( 122,122,java.awt.Image.SCALE_SMOOTH));
-		notPlayPrevIco = new ImageIcon(notPlayPrevIco.getImage().getScaledInstance( 122,122,java.awt.Image.SCALE_SMOOTH));
-		playPrevBtn.setBounds(playPrevX,playPrevY,122,122);
-		playPrevBtn.setIcon(playPrevIco);
-		playPrevBtn.setBorder(null);
-		playPrevBtn.setContentAreaFilled(false);
-		add(playPrevBtn);*/
-
-				
+						
 		add(container);
 		container.add(tabs);
 		container.add(scrollLabelsContainer);
 		container.add(base);
 		scrollLabelsContainer.add(scrollBar);
 		scrollLabelsContainer.add(scrollLabels);
-		
-		
-		//System.out.println("adddd");
 	}
 	
 	public void setMainPane(MainPane main) {
@@ -324,9 +308,6 @@ public class PrincipalPanel extends JPanel {
 		fillNameList();
 		setActions();
 		setPlayPrevBtn();
-		//System.out.println("Principal pane components: ");
-		//this.main.addListenerToUpdate(this);
-		//System.out.println("End of Principal pane components: ");
 	}
 	
 	public void setPlayPrevBtn() {
@@ -334,7 +315,6 @@ public class PrincipalPanel extends JPanel {
 		playPrevY = this.main.squareButtonVerticalGap;
 		playPrevWidth = this.main.squareButtonSize;
 		playPrevHeight = this.main.squareButtonSize;
-		//System.out.println("x: "+playPrevX+", y: "+playPrevY+", width: "+playPrevWidth);
 		playPrevIco = new ImageIcon(playPrevIco.getImage().getScaledInstance( this.main.squareButtonSize, this.main.squareButtonSize,java.awt.Image.SCALE_SMOOTH));
 		notPlayPrevIco = new ImageIcon(notPlayPrevIco.getImage().getScaledInstance( this.main.squareButtonSize, this.main.squareButtonSize,java.awt.Image.SCALE_SMOOTH));
 		pressedPlayPrevIco = new ImageIcon(pressedPlayPrevIco.getImage().getScaledInstance( this.main.squareButtonSize, this.main.squareButtonSize,java.awt.Image.SCALE_SMOOTH));
@@ -685,16 +665,6 @@ public class PrincipalPanel extends JPanel {
 					playPrevBtn.setIcon(notPlayPrevIco);
 					playPrevBtn.setPressedIcon(pressedNotPlayPrevIco);
 				}
-				//System.out.println(playPrevBtn.getIcon());
-				/*Image im = playPrevIco.getImage();
-			    java.awt.Graphics2D g2 = (java.awt.Graphics2D) im.getGraphics();
-			    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
-			    g2.drawImage(im,0, 0, null);
-			    g2.dispose();
-			    playPrevIco = new ImageIcon(im);
-			    playPrevBtn.setIcon(playPrevIco);
-			    System.out.println("click");*/
-			    //ImageIcon icon = ...
 			}
 		});
 		

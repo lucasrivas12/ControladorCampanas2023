@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 public class MenuNavegation {
 	private MenuItemTree menu = new MenuItemTree();
 	private String itemName = "ExecutionTimePanel";
-	//private String[] hideExceptions = {"back","lock","DateAndHour"};
 	private ArrayList<String> hideExceptions = new ArrayList<String>(); 
 	private Component[] components;
 	private ArrayList<String> visibleComponents;
@@ -56,24 +55,20 @@ public class MenuNavegation {
 	}
 	
 	public void panelSwitch() {
-
 		Component selectedComponent = null;
 		panelExceptionHandler();
 		hideAllComponents(true);
 		selectedComponent = componentSearch(itemName);
-		selectedComponent.setVisible(true);
-		
+		selectedComponent.setVisible(true);	
 	}
 	
 	public void screenSaver() {
 		boolean activated = componentSearch("ScreenSaver").isVisible();
-		
 		if(!activated) 
 			visibleComponents = hideAllComponents(false);
 		else
 			for(String component: visibleComponents)
 				componentSearch(component).setVisible(true);
-		
 		componentSearch("ScreenSaver").setVisible(!activated);
 	}
 	
@@ -82,7 +77,6 @@ public class MenuNavegation {
 		for (int i = 0; i < components.length; i++)
 		{
 			String componentName = getComponentName(components[i]);
-			//System.out.println(componentName); //*******************************************************************************************//
 			if(name.equals(componentName))
 				selectedComponent = components[i];
 		}

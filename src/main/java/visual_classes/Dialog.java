@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 
 public class Dialog extends JPanel {

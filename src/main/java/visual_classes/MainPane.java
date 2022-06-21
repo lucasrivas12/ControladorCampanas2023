@@ -1,13 +1,11 @@
 package visual_classes;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -67,10 +65,8 @@ public class MainPane extends JPanelBackground {
 	//private boolean keyboardOn = true;
 	JLabel l;
 	MouseAdapter updateAdapter;
-	//GpioComm gpio = new GpioComm();
 	
 	public MainPane(JFrame f) {
-		//System.out.println(gpio.PIN_LED);
 		frame = f;
 		sizeSetting();
 		add(executionTimePane);
@@ -113,29 +109,6 @@ public class MainPane extends JPanelBackground {
 		dateAndHour.setMainPane(this);
 		sendExecution.setMainPane(this);
 		virtualKeyboard.setFrame(frame);
-		setUpdateAdapter();
-		
-		//////////////
-		/*selectDatePane.showCalendar();
-		atribute.time = MenuOptionsTime.PROGRAMADAS;
-		menuNavegation.goTo(atribute,4);	*/
-		/////////////
-		
-		/*l = new JLabel("texto");
-		l.setBounds(0,100,50,50);
-		l.setOpaque(true);
-		add(l);
-		Movement move = new Movement(this.l);
-		//move.setUniformMovement(950,4000,'x');
-		move.setSmoothFinal(350,1000,'x');
-		move.start();*/
-		//virtualKeyboard
-		/*
-		Component[] comp = getComponents();	
-		for(Component c: comp) {
-			System.out.println(c);
-		}*/
-		//main.addListenerToUpdate(this);
 		
 		back_btn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -161,8 +134,8 @@ public class MainPane extends JPanelBackground {
 		});	
 		
 	}
-	
-		public void setScreenSaverListenerToDeactivateIt(){
+
+	public void setScreenSaverListenerToDeactivateIt(){
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -178,20 +151,8 @@ public class MainPane extends JPanelBackground {
 	public void setInitialPanel(){
 		passRead.setFilename("main_data.int");
 		System.out.println("main_data: "+passRead.ifExist());
-		if(passRead.ifExist()) {
-			if(passRead.readFile().startsWith("qzr")) {
-				atribute.first = false;
-				menuNavegation.next(atribute);
-			}
-			else {
-				atribute.first = true;
-				menuNavegation.next(atribute);
-			}	
-		}
-		else {
-			atribute.first = true;
-			menuNavegation.next(atribute);
-		}
+		atribute.first = !(passRead.ifExist() && passRead.readFile().startsWith("qzr"));
+		menuNavegation.next(atribute);
 	}
 	
 	private void sizeSetting(){
@@ -260,37 +221,6 @@ public class MainPane extends JPanelBackground {
         }
         return ch;
 	}
-	
-	/*public void resetArduino() {
-		String openFileCmd = "python3 GPIOLedPulse.py";
-		Process p;
-		try{
-			p = Runtime.getRuntime().exec(openFileCmd);
-			p.waitFor();
-			p.destroy();
-		} catch(Exception e){}
-	}*/
-	
-	public void setUpdateAdapter() {
-		updateAdapter = new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				dateAndHour.update();
-			}
-		};
-	}
-	
-	/*public void addListenerToUpdate(JComponent component) {
-		Component[] comp = component.getComponents();
-		if(comp.length == 0) {
-			System.out.println(component);
-			component.addMouseListener(updateAdapter);
-		}
-		else
-			for(Component c: comp) {			
-				addListenerToUpdate((JComponent) c);
-			}
-	}*/
 	
 	
 }

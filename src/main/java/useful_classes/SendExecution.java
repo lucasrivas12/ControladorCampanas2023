@@ -164,9 +164,6 @@ public class SendExecution {
 		main.principalPane.fillNameList();
 		main.principalPane.reset(false);
 		main.principalPane.repaint();
-		
-		for(String name: scheduledExecutionList){}
-			//System.out.println(name);
 	}
 		
 	private void playExecution() {

@@ -61,10 +61,6 @@ public class ExecutionTimePanel extends JPanel {
 		int btn2Y = btn1Y + gap + height;
 		int btn3Y = btn2Y+ gap + height;
 		
-	/*	System.out.println("btn1Y: "+btn1Y+", btn2Y: "+btn2Y+", btn3Y: "+btn3Y);
-		System.out.println("Button width: "+width);
-		System.out.println("Button height: "+height);*/
-		
 		//Buttons declaration
 		//Toque button
 		inmediatas_btn = new JButton();

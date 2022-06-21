@@ -81,25 +81,17 @@ public class DateAndHour extends JPanel {
 	
 	public void setMainPane(MainPane main) {
 		this.main = main;
-		//startTimer(time);
 		timeDateUpdate();
-		//resetArduinoUpdate();
-
-		//this.main.addListenerToUpdate(this);
 	}
 	
 	private void getDate() {
 		Date date = new Date();
 		//date.setHours(18);
 		//date.setMinutes(0);
-		DateFormat secondFormat = new SimpleDateFormat("ss");
 		
 		//Hora
 		DateFormat hourFormat = new SimpleDateFormat("hh:mm aa");
-		//String test = hourFormat.format(date);
-		/*for(int i=0;i<test.length();i++){
-			System.out.println(i+": "+test.charAt(i)+", "+(int)test.charAt(i));
-		}*/
+
 		char replaceDigit = os.ifWindows()? (char)160:(char)32;
 		String replacedText = hourFormat.format(date).replace(String.valueOf(replaceDigit),"");
 		replacedText = os.ifWindows()? replacedText:replacedText.substring(0,5)+" "+replacedText.substring(5);
@@ -113,7 +105,7 @@ public class DateAndHour extends JPanel {
 		//Mes
 		DateFormat dateFormat = new SimpleDateFormat("M");
 		texto_mes = dateFormat.format(date);
-		//System.out.println("dia: "+dayFormat.format(date)+", month: "+dateFormat.format(date));
+
 		//Ao
 		DateFormat yearFormat = new SimpleDateFormat("yyyy");
 		texto_ano = yearFormat.format(date);
@@ -130,42 +122,7 @@ public class DateAndHour extends JPanel {
 		String dateCompare = forCompareDateFormat.format(date);
 		
 		dateForCompare = weekCorrect+";"+dateCompare+";"+hourCompare;
-		//System.out.println(dateForCompare);
 	}
-	
-	/*public void startTimer(int seg) {
-	    TimerTask task = new TimerTask() {
-	        public void run() {
-	            main.save_screen_on = true;
-				main.menuNavegation.screenSaver();
-	        	System.out.println("Timer finished");
-	        }
-	    };
-	    timer = new Timer("Timer");
-	    
-	    long delay = seg*1000L;
-	    timer.schedule(task, delay);
-	}*/
-	
-	/*public void arduinoClockPulseDaley(int seg) {
-	    TimerTask task = new TimerTask() {
-	        public void run() {
-	        	//Clock pulse
-        		main.sendExecution.clockPulseA();
-        		
-        		if(texto_hora.equals("06:05 p.m.")) {
-        			main.sendExecution.backlightOn();
-        		}
-        		else if(texto_hora.equals("06:05 a.m.")) {
-        			main.sendExecution.backlightOff();
-        		}
-	        }
-	    };
-	    arduinoDelayTimer = new Timer("Timer");
-	    
-	    long delay = seg*1000L;
-	    arduinoDelayTimer.schedule(task, delay);
-	}*/
 	
 	public void update() {
 		//System.out.println("update");
@@ -211,7 +168,6 @@ public class DateAndHour extends JPanel {
 	        public void run() {    	
 	        	getDate();
 	        	if(minuteChange) {
-	        		//System.out.println("it do a minuteChange: "+minuteChange);
 	        		minuteChange=false;
 					try {
 						main.sendExecution.compareDateStrings(dateForCompare);
@@ -220,7 +176,6 @@ public class DateAndHour extends JPanel {
 						e.printStackTrace();
 					}
 					//To handle to clock and backlight by arduino
-					//arduinoClockPulseDaley(30);
 					main.sendExecution.clockPulseA();
 	        		
 	        		if(texto_hora.equals("06:00 p.m.") && !backlight) {
@@ -247,21 +202,4 @@ public class DateAndHour extends JPanel {
 	    long period = 1000L;
 	    timer.scheduleAtFixedRate(repeatedTask, delay, period);
 	}
-	
-	/*public void resetArduinoUpdate() {
-		 TimerTask repeatedTask = new TimerTask() {
-		        public void run() {
-		        	main.resetArduino();
-		        }
-		 };
-		 Timer timer = new Timer("Timer");
-		
-		long delay = 0L;
-		long second = 1000L;
-		long hour = second * 3600;
-		long day = hour * 24;
-		long period = day * 1;
-		timer.scheduleAtFixedRate(repeatedTask, delay, period);
-	}*/
-
 }
