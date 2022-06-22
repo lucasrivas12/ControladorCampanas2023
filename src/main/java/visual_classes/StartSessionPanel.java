@@ -239,7 +239,7 @@ public class StartSessionPanel extends JPanel {
 		}
 		else {
 			show_password_img.setIcon(off);
-			password_fld.setEchoChar('*');
+			password_fld.setEchoChar('●');
 		}
 	}
 	

@@ -116,7 +116,6 @@ public class FileHandler {
 		  String txt="";
 		  String[] lines = null;
 		  try {	
-			  	System.out.println("just before read filename: "+filename);
 	            FileReader reader = new FileReader(filename);
 	            BufferedReader bufferedReader = new BufferedReader(reader);
 	           

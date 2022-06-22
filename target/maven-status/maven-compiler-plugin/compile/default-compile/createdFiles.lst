@@ -1,6 +1,5 @@
 useful_classes/SendExecution$1.class
 visual_classes/FirstTimePanel$3.class
-com/pi4j/example/MinimalExample.class
 visual_classes/StartSessionPanel$4.class
 visual_classes/ChangePasswordPanel$2.class
 visual_classes/SelectExecutionPanel$6.class
@@ -15,7 +14,6 @@ useful_classes/FileHandler$2.class
 visual_classes/PrincipalPanel.class
 visual_classes/ExecutionTypePanel$1.class
 visual_classes/VirtualNumberKeyboard.class
-visual_classes/MainPane$5.class
 useful_classes/osChange.class
 visual_classes/PrincipalPanel$4.class
 module-info.class
@@ -40,7 +38,6 @@ visual_classes/FirstTimePanel$1.class
 visual_classes/ChangePasswordPanel$1.class
 visual_classes/ChangePasswordPanel$3.class
 visual_classes/MainPane$2.class
-com/pi4j/example/PrintInfo.class
 useful_classes/Movement.class
 visual_classes/MainPane$1.class
 useful_classes/MenuAtributes.class

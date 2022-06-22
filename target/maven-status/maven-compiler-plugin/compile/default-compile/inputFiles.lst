@@ -2,7 +2,6 @@
 /home/pi/controller-ui/src/main/java/useful_classes/MenuAtributes.java
 /home/pi/controller-ui/src/main/java/visual_classes/FirstTimePanel.java
 /home/pi/controller-ui/src/main/java/useful_classes/MenuNavegation.java
-/home/pi/controller-ui/src/main/java/com/pi4j/example/PrintInfo.java
 /home/pi/controller-ui/src/main/java/useful_classes/Movement.java
 /home/pi/controller-ui/src/main/java/visual_classes/JPanelBackground.java
 /home/pi/controller-ui/src/main/java/visual_classes/MainPane.java
@@ -26,7 +25,6 @@
 /home/pi/controller-ui/src/main/java/useful_classes/osChange.java
 /home/pi/controller-ui/src/main/java/visual_classes/VirtualKeyboard.java
 /home/pi/controller-ui/src/main/java/visual_classes/PrincipalPanel.java
-/home/pi/controller-ui/src/main/java/com/pi4j/example/MinimalExample.java
 /home/pi/controller-ui/src/main/java/visual_classes/VirtualNumberKeyboard.java
 /home/pi/controller-ui/src/main/java/useful_classes/GpioComm.java
 /home/pi/controller-ui/src/main/java/visual_classes/window.java
