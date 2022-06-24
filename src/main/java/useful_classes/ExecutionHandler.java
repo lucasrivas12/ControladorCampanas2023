@@ -16,10 +16,14 @@ public class ExecutionHandler {
 	private ArrayList<Timer> timer = new ArrayList();
 	private int executionDuration;
 	private int extraDuration = 200;
+	private boolean onExecution = false;
+	private boolean onClockPulse = false;
+	private boolean onBacklight = false;
+	private boolean onGround = false;
 
 	public ExecutionHandler(){
 		gpio.initAll();
-		ground(true);
+		//ground(true);
 	}
 	private void setExecutionLines(String[] executionLines){
 		this.executionLines = executionLines;
@@ -64,11 +68,19 @@ public class ExecutionHandler {
 			gpio.setLow("BB");
 			gpio.setLow("BC");
 		}
-		
+		onExecution = false;
+		ground(false);
+	}
+
+	public void executionHasFinished(){
+		onExecution = false;
+		ground(false);
 	}
 	
 	public int playExecution(String[] executionLines) {
+		onExecution = true;
 		executionDuration = 0;
+		ground(true);
 		setExecutionLines(executionLines);
 		defineType();
 		if(isToques)
@@ -108,34 +120,56 @@ public class ExecutionHandler {
 	}
 	
 	public void clockPulseA() {
+		onClockPulse = true;
+		ground(true);
 		gpio.setPulse("RA",1000);
+		onClockPulse = false;
+		ground(false);
 	}
 	
 	public void clockPulseB(int duration) {
+		onClockPulse = true;
+		ground(true);
 		gpio.setPulse("RB",duration);
+		onClockPulse = false;
+		ground(false);
 	}
 	
 	public void carrillon(boolean state) {
 		if(state) {
+			onExecution = true;
+			ground(true);
 			gpio.setHigh("CARRILLON");
 		} else {
+			onExecution = false;
+			ground(false);
 			gpio.setLow("CARRILLON");
 		}
 	}
 	
-	public void ground(boolean state) {
+	private void ground(boolean state) {
 		if(state) {
-			gpio.setHigh("GND");
+			if(!onGround){
+				gpio.setHigh("GND");
+				onGround = true;
+			}
 		} else {
-			gpio.setLow("GND");
+			if(!(onExecution || onClockPulse || onBacklight)){
+				gpio.setLow("GND");
+				onGround = false;
+			}
 		}
 	}
 	
 	public void backlight(boolean state) {
 		if(state) {
+			onBacklight = true;
+			ground(true);
 			gpio.setHigh("BACKLIGHT");
 		} else {
 			gpio.setLow("BACKLIGHT");
+			onBacklight = false;
+			ground(false);
 		}
 	}
 

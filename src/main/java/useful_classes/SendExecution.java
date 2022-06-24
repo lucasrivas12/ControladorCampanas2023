@@ -225,6 +225,7 @@ public class SendExecution {
 	public void executionFinished(){
 		bellExecution = false;
         main.principalPane.placeBtns(false);
+		executionHandler.executionHasFinished();
 	}
 	
 	public void executionFinished(long mili) {
@@ -232,6 +233,7 @@ public class SendExecution {
 	        public void run() {
 				bellExecution = false;
         		main.principalPane.placeBtns(false);
+				executionHandler.executionHasFinished();
 			}
 	    };
 	    timer = new Timer("Timer");

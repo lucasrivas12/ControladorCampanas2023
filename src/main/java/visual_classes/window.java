@@ -18,10 +18,10 @@ public class window extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		String[] fontNames = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		/*String[] fontNames = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 		for(String name: fontNames)
 			if(!name.startsWith("Noto"))
-				System.out.println(name);
+				System.out.println(name);*/
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

@@ -47,7 +47,7 @@ public class VirtualNumberKeyboard  extends JPanel{
      */
 	//Special keys
 	private final String LEFT_ARROW = "🢀";
-	private final String RIGHT_ARROW ="🢂‚";
+	private final String RIGHT_ARROW ="🢂";
 	private final String UP_ARROW ="🢁";
 	private final String DOWN_ARROW ="🢃";
 	private final String CLEAR ="✘";

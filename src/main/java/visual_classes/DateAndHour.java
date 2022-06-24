@@ -152,6 +152,19 @@ public class DateAndHour extends JPanel {
         }
         return letraD;
     }
+
+	private boolean onBacklightTime(String time){
+		//06:00 p.m.
+		int hour = Integer.valueOf(time.substring(0, 2));
+		String meridiem = time.substring(6, 10);
+		boolean value;
+		if(meridiem.equals("p.m.")){
+			value = hour >= 6 && hour < 12; 
+		} else {
+			value = (hour >= 1 && hour < 6) || hour == 12; 
+		}
+		return value;
+	}
 	
 	public void timeDateUpdate() {
 		Date date = new Date();
@@ -178,11 +191,11 @@ public class DateAndHour extends JPanel {
 					//To handle to clock and backlight by arduino
 					main.sendExecution.clockPulseA();
 	        		
-	        		if(texto_hora.equals("06:00 p.m.") && !backlight) {
+	        		if(onBacklightTime(texto_hora) && !backlight) {
 	        			main.sendExecution.backlightOn();
 	        			backlight = !backlight;
 	        		}
-	        		else if(texto_hora.equals("06:00 a.m.") && backlight) {
+	        		else if(!onBacklightTime(texto_hora) && backlight) {
 	        			main.sendExecution.backlightOff();
 	        			backlight = !backlight;
 	        		}
