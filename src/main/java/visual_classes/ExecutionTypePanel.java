@@ -99,7 +99,7 @@ public class ExecutionTypePanel extends JPanel {
 		toques_btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Click en toques");
+				//System.out.println("Click en toques");
 			}
 		});
 		

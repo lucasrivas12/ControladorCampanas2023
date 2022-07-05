@@ -60,7 +60,7 @@ public class GpioComm {
 		io27 = pi4j.create(config.address(27));
 	}
 	public void initPin(int pin){
-		System.out.print("Started: ");
+		//System.out.print("Started: ");
 		System.out.println(pi4j);
 		switch(pin){
 			case 4:
