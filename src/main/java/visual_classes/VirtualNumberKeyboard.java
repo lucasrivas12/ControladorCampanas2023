@@ -46,12 +46,12 @@ public class VirtualNumberKeyboard  extends JPanel{
      * Private class for storing key specification.
      */
 	//Special keys
-	private final char LEFT_ARROW = '\u2b05';
-	private final char RIGHT_ARROW = '\u27a1';
-	private final char UP_ARROW = '\u2b06';
-	private final char DOWN_ARROW = '\u2b07';
-	private final char CLEAR = '\u2718';
-	private final char READY = '\u2714';
+	private final char LEFT_ARROW = '\u2190'; //u2190
+	private final char RIGHT_ARROW = '\u2192'; //u2192
+	private final char UP_ARROW = '\u2191';
+	private final char DOWN_ARROW = '\u2193';
+	private final char CLEAR = 'X'; //u2718
+	private final char READY = '\u2713'; //u2714
 
 	
     // First key row
@@ -150,6 +150,7 @@ public class VirtualNumberKeyboard  extends JPanel{
             char key = keys[i];
             JButton button;
             button = new JButton(String.valueOf(key));
+			button.setFont(new Font("Arial",Font.PLAIN,20));
             int lineThickness = 2;
             button.setBorder(new MatteBorder(lineThickness, lineThickness, lineThickness, lineThickness, (Color) Color.WHITE));
             button.setForeground(Color.WHITE);

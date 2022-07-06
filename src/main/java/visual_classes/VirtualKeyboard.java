@@ -75,7 +75,7 @@ public class VirtualKeyboard  extends JPanel implements FocusListener{
     //private final Key TAB_KEY = new Key(KeyEvent.VK_TAB, "Tab");
     private final Key PARENTHESIS_KEY = new Key(KeyEvent.VK_LEFT_PARENTHESIS,"(",")");
     private final Key CAPS_LOCK_KEY = new Key(KeyEvent.VK_CAPS_LOCK, "Caps");
-    private final Key SHIFT_KEY = new Key(KeyEvent.VK_SHIFT, String.valueOf('\u21E7'));
+    private final Key SHIFT_KEY = new Key(KeyEvent.VK_SHIFT, String.valueOf('\u2191'));
     private final Key ACUTE_KEY = new Key(KeyEvent.VK_DEAD_ACUTE, "´", "`");
     private final Key GRAVE_KEY = new Key(KeyEvent.VK_DEAD_GRAVE, "`");
     private final Key TILDE_CIRCUMFLEX_KEY = new Key(KeyEvent.VK_DEAD_TILDE, "~", "^");
