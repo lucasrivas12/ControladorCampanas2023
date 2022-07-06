@@ -46,27 +46,27 @@ public class VirtualNumberKeyboard  extends JPanel{
      * Private class for storing key specification.
      */
 	//Special keys
-	private final String LEFT_ARROW = "🢀";
-	private final String RIGHT_ARROW ="🢂";
-	private final String UP_ARROW ="🢁";
-	private final String DOWN_ARROW ="🢃";
-	private final String CLEAR ="✘";
-	private final String READY ="✔";
+	private final char LEFT_ARROW = '\u2b05';
+	private final char RIGHT_ARROW = '\u27a1';
+	private final char UP_ARROW = '\u2b06';
+	private final char DOWN_ARROW = '\u2b07';
+	private final char CLEAR = '\u2718';
+	private final char READY = '\u2714';
 
 	
     // First key row
     private String[] row1 = new String[]{
-        "7","8","9",UP_ARROW
+        "7","8","9",String.valueOf(UP_ARROW);
     };
     
     // Second key row
     private String[] row2 = new String[]{
-            "4","5","6",DOWN_ARROW
+            "4","5","6",String.valueOf(DOWN_ARROW);
     };
 
     // Third key row
     private String[] row3 = new String[]{
-            "1","2","3",CLEAR
+            "1","2","3",String.valueOf(CLEAR);
     };
 
     // Fourth key row
@@ -182,7 +182,7 @@ public class VirtualNumberKeyboard  extends JPanel{
         return p;
     }
 
-    private void actionListener(String key) {
+    private void actionListener(char key) {
     	int numData;
     	if(isNumeric(key)) {
 	    	dataBuffer += key;
@@ -191,7 +191,7 @@ public class VirtualNumberKeyboard  extends JPanel{
     	else {
     		switch(key) {
     		case UP_ARROW:
-    			numData= select<2? Integer.parseInt(hourData[select].getText()):0;
+    			numData = select<2? Integer.parseInt(hourData[select].getText()):0;
     			stepWrite(numData,true);
     			break;
     		case DOWN_ARROW:
