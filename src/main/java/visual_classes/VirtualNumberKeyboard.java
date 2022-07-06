@@ -55,23 +55,23 @@ public class VirtualNumberKeyboard  extends JPanel{
 
 	
     // First key row
-    private String[] row1 = new String[]{
-        "7","8","9",String.valueOf(UP_ARROW);
+    private char[] row1 = new char[]{
+        '7','8','9',UP_ARROW
     };
     
     // Second key row
-    private String[] row2 = new String[]{
-            "4","5","6",String.valueOf(DOWN_ARROW);
+    private char[] row2 = new char[]{
+            '4','5','6',DOWN_ARROW
     };
 
     // Third key row
-    private String[] row3 = new String[]{
-            "1","2","3",String.valueOf(CLEAR);
+    private char[] row3 = new char[]{
+            '1','2','3',CLEAR
     };
 
     // Fourth key row
-    private String[] row4 = new String[]{
-    		LEFT_ARROW,"0",RIGHT_ARROW,READY
+    private char[] row4 = new char[]{
+    		LEFT_ARROW,'0',RIGHT_ARROW,READY
     };
 
     public VirtualNumberKeyboard() {
@@ -137,7 +137,7 @@ public class VirtualNumberKeyboard  extends JPanel{
     	return colorWithAlpha;
     }
 
-    private JPanel initRow(String[] keys, Dimension dimensions, Color panelColor) {
+    private JPanel initRow(char[] keys, Dimension dimensions, Color panelColor) {
     	int outerButtonsGap = 10;
     	int innerButtonsGap = 10;
     	
@@ -147,9 +147,9 @@ public class VirtualNumberKeyboard  extends JPanel{
         int buttonHeight = (dimensions.height - outerButtonsGap*2 - innerButtonsGap*3) / 4; // number of rows
         int compensationButtonX = Math.round(dimensions.width-outerButtonsGap*2)/2-(buttonWidth*keys.length+innerButtonsGap*(keys.length-1))/2;
         for (int i = 0; i < keys.length; ++i) {
-            String key = keys[i];
+            char key = keys[i];
             JButton button;
-            button = new JButton(key);
+            button = new JButton(String.valueOf(key));
             int lineThickness = 2;
             button.setBorder(new MatteBorder(lineThickness, lineThickness, lineThickness, lineThickness, (Color) Color.WHITE));
             button.setForeground(Color.WHITE);
@@ -328,7 +328,8 @@ public class VirtualNumberKeyboard  extends JPanel{
     	dataBuffer = dataBuffer.length() < 2? "0"+dataBuffer:dataBuffer;
     	hourData[select].setText(dataBuffer);
     }
-    private boolean isNumeric(String strNum) {
+    private boolean isNumeric(char charNum) {
+    	String strNum = String.valueOf(charNum);
         if (strNum == null) {
             return false;
         }
