@@ -12,6 +12,11 @@ import javazoom.jl.player.Player;
 
 import visual_classes.MainPane;
 
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+
 public class SendExecution {
 	MainPane main;
 	public ArrayList<String> scheduledExecutionList;
@@ -29,11 +34,18 @@ public class SendExecution {
 	public boolean playPrev = true;
 	ExecutionHandler executionHandler = new ExecutionHandler();
 	osChange os = new osChange();
+	Logger logger = Logger.getLogger("MyLog");  
+    Handler fh;  
 
 	public SendExecution(){
-		fl.setDirection("sav");
-		prevFl.setDirection("files");
-		prevFl.setFilename("Ángelus.mp3");
+		try {
+			fl.setDirection("sav");
+			prevFl.setDirection("files");
+			prevFl.setFilename("Ángelus.mp3");
+		} catch (Exception e) {
+			LoggingTester("ERROR:" + String.valueOf( e));
+		}
+		
 	}
 	
 	public void setScheduledExecutionList(ArrayList<String> executionList) {
@@ -55,6 +67,7 @@ public class SendExecution {
 			} catch (FileNotFoundException | JavaLayerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				LoggingTester("ERROR: playMelodiasByPhone" + String.valueOf( e));
 			}
 		}
 		else {
@@ -68,37 +81,48 @@ public class SendExecution {
 		boolean dayCoincide;
 		boolean hourCoincide;
 		//System.out.println("It is in compareDateStrings");
-
-		for(int i=0;i<scheduledExecutionList.size();i++) {
-			String[] scheduledParts = scheduledExecutionList.get(i).split(";");
-			String[] actualDateHourParts = actualDateHour.split(";");
-			boolean isDate = scheduledParts[0].contains("-");
-			if(isDate) {
-				dateCoincide = scheduledParts[0].equals(actualDateHourParts[1]);
-				hourCoincide = scheduledParts[1].equals(actualDateHourParts[2]);
-				coincide = dateCoincide && hourCoincide;
+		try {
+			for(int i=0;i<scheduledExecutionList.size();i++) {
+				String[] scheduledParts = scheduledExecutionList.get(i).split(";");
+				String[] actualDateHourParts = actualDateHour.split(";");
+				boolean isDate = scheduledParts[0].contains("-");
+				if(isDate) {
+					dateCoincide = scheduledParts[0].equals(actualDateHourParts[1]);
+					hourCoincide = scheduledParts[1].equals(actualDateHourParts[2]);
+					coincide = dateCoincide && hourCoincide;
+				}
+				else {
+					dayCoincide = scheduledParts[0].contains(actualDateHourParts[0]);
+					hourCoincide = scheduledParts[1].equals(actualDateHourParts[2]);
+					coincide = dayCoincide && hourCoincide;
+				}
+				if(coincide) {
+					prepareForExecution(scheduledParts[2]);
+					if(isDate) deleteExecution(i);
+					coincide=false;
+					break;
+				}
 			}
-			else {
-				dayCoincide = scheduledParts[0].contains(actualDateHourParts[0]);
-				hourCoincide = scheduledParts[1].equals(actualDateHourParts[2]);
-				coincide = dayCoincide && hourCoincide;
-			}
-			if(coincide) {
-				prepareForExecution(scheduledParts[2]);
-				if(isDate) deleteExecution(i);
-				coincide=false;
-				break;
-			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
 		}
+		
 	}
 	
 	public void  prepareForExecution(String executionName) throws FileNotFoundException, JavaLayerException {
 		executionToSend = executionName;
 		//("To execute: "+executionToSend);
-		setExtension();
-		setDirection();
-		setFilename();
-		startExecution();
+		try {
+			setExtension();
+			setDirection();
+			setFilename();
+			startExecution();
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
+		}
+		
 	}
 	
 	public void setMainPane(MainPane main) {
@@ -120,7 +144,8 @@ public class SendExecution {
 
 	private void startExecution() throws FileNotFoundException, JavaLayerException{
 		main.principalPane.placeBtns(true);
-		if(!playSong && !bellExecution)
+		try {
+			if(!playSong && !bellExecution)
 			if(extension.equals("mp3")){
 				//stopSong();
 				//if(!playSong)
@@ -136,45 +161,63 @@ public class SendExecution {
 					}
 				//}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
+		}
+		
 	}
 
 	private void deleteExecution(int index) {
 		fl.setDirection("sav");
-		switch(extension){
-			case "mp3":
-				fl.setFilename("melodias.int");
-				break;
-			case "toc":
-				fl.setFilename("toques.int");
-				break;
-			case "sec":
-				fl.setFilename("secuencias.int");
-				break;
-		}
-		String sheduledExecution = scheduledExecutionList.get(index);
-		String[] fileLines;
-		
-		fileLines = fl.readFileLine();
-		fl.writeFile("",false);
-		for(String line: fileLines) {
-			if(!line.equals(sheduledExecution)) {
-				fl.writeFileln(line,true);
+		try {
+			switch(extension){
+				case "mp3":
+					fl.setFilename("melodias.int");
+					break;
+				case "toc":
+					fl.setFilename("toques.int");
+					break;
+				case "sec":
+					fl.setFilename("secuencias.int");
+					break;
 			}
+			String sheduledExecution = scheduledExecutionList.get(index);
+			String[] fileLines;
+			
+			fileLines = fl.readFileLine();
+			fl.writeFile("",false);
+			for(String line: fileLines) {
+				if(!line.equals(sheduledExecution)) {
+					fl.writeFileln(line,true);
+				}
+			}
+			main.principalPane.fillNameList();
+			main.principalPane.reset(false);
+			main.principalPane.repaint();
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
 		}
-		main.principalPane.fillNameList();
-		main.principalPane.reset(false);
-		main.principalPane.repaint();
+		
 	}
 		
 	private void playExecution() {
 		String[] fileLines;
 		int duration;
-		fileLines = fl.readFileLine();
-		duration = executionHandler.playExecution(fileLines);
-		executionFinished(duration);
+		try {
+			fileLines = fl.readFileLine();
+			duration = executionHandler.playExecution(fileLines);
+			executionFinished(duration);
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
+		}
+		
 	}
 	
 	public void playSong() throws FileNotFoundException, JavaLayerException {
+
 		FileInputStream relative = new FileInputStream(fl.getFilePath());
 		musicFilePlayer = new Player(relative);
 		playSong = true;
@@ -189,7 +232,8 @@ public class SendExecution {
 						}	
 					} catch (JavaLayerException e) {
 					   e.printStackTrace();
-					}
+					   LoggingTester("ERROR:" + String.valueOf( e));
+					} 
 	          }
 	       }.start();      
 	}
@@ -209,37 +253,57 @@ public class SendExecution {
 						}	
 					} catch (JavaLayerException e) {
 					   e.printStackTrace();
+					   LoggingTester("ERROR:" + String.valueOf( e));
 					}
 	          }
 	       }.start();      
 	}
 	
 	public void stopBellExecution() {
-		if(bellExecution) {
-			bellExecution = false;
-        	main.principalPane.placeBtns(false);
-        	executionHandler.stopExecution();
+		try {
+			if(bellExecution) {
+				bellExecution = false;
+				main.principalPane.placeBtns(false);
+				executionHandler.stopExecution();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
 		}
+		
 	}
 
 	public void executionFinished(){
+		
 		bellExecution = false;
-        main.principalPane.placeBtns(false);
-		executionHandler.executionHasFinished();
+		try {
+			
+			main.principalPane.placeBtns(false);
+			executionHandler.executionHasFinished();
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
+		}
 	}
 	
 	public void executionFinished(long mili) {
-	    TimerTask task = new TimerTask() {
-	        public void run() {
-				bellExecution = false;
-        		main.principalPane.placeBtns(false);
-				executionHandler.executionHasFinished();
-			}
-	    };
-	    timer = new Timer("Timer");
+		try {
+			TimerTask task = new TimerTask() {
+				public void run() {
+					bellExecution = false;
+					main.principalPane.placeBtns(false);
+					executionHandler.executionHasFinished();
+				}
+			};
+			timer = new Timer("Timer");
+			
+			long delay = mili;
+			timer.schedule(task, delay);
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
+		}
 	    
-	    long delay = mili;
-	    timer.schedule(task, delay);
 	}
 	
 	public void clockPulseA() {
@@ -255,23 +319,51 @@ public class SendExecution {
 	}
 	
 	public void stopSong() {
-		if(playSong) {
-			playSong = false;
-			musicFilePlayer.close();
-			main.principalPane.placeBtns(false);
-			executionHandler.carrillon(false);
+		try {
+			if(playSong) {
+				playSong = false;
+				musicFilePlayer.close();
+				main.principalPane.placeBtns(false);
+				executionHandler.carrillon(false);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
 		}
+		
 	}
 	
 	public void finishPrevSong() {
 		//System.out.println("entré ");
 		System.out.print(playSong);
-		if(playSong) {
-			playSong = false;
-			musicFilePlayer.close();
-			executionHandler.carrillon(false);
-			playExecution();
-			//main.principalPane.placeBtns(false);
+		try {
+			if(playSong) {
+				playSong = false;
+				musicFilePlayer.close();
+				executionHandler.carrillon(false);
+				playExecution();
+				//main.principalPane.placeBtns(false);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			LoggingTester("ERROR:" + String.valueOf( e));
+		}
+		
+	}
+
+	public void LoggingTester(String message) {
+		try {
+			// This block configure the logger with handler and formatter  
+			fh = new java.util.logging.FileHandler("MyLogFile.log");  
+			logger.addHandler(fh);
+			SimpleFormatter formatter = new SimpleFormatter();  
+			fh.setFormatter(formatter);  
+	
+			// the following statement is used to log any messages  
+			logger.info(message);  
+		} catch (Exception e) {
+			e.printStackTrace();  
+			logger.info(e.toString());  
 		}
 	}
 
