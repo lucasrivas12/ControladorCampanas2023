@@ -34,6 +34,7 @@ module visual_classes {
     requires org.slf4j.simple;
     requires java.desktop;
     requires jlayer;
+    requires java.logging;
 
     uses com.pi4j.extension.Extension;
     uses com.pi4j.provider.Provider;

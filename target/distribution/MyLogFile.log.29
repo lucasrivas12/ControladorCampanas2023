@@ -1,0 +1,8 @@
+ago. 20, 2023 11:23:00 A. M. useful_classes.ExecutionHandler LoggingTester
+INFORMACIÓN: ERROR:com.pi4j.io.exception.IOException: PIGPIO NOT INITIALIZED; make sure you call the PiGpio::initialize() function first.
+ago. 20, 2023 11:23:00 A. M. useful_classes.ExecutionHandler LoggingTester
+INFORMACIÓN: ERROR:com.pi4j.io.exception.IOException: PIGPIO NOT INITIALIZED; make sure you call the PiGpio::initialize() function first.
+ago. 20, 2023 11:24:00 A. M. useful_classes.ExecutionHandler LoggingTester
+INFORMACIÓN: ERROR:com.pi4j.io.exception.IOException: PIGPIO NOT INITIALIZED; make sure you call the PiGpio::initialize() function first.
+ago. 20, 2023 11:24:00 A. M. useful_classes.ExecutionHandler LoggingTester
+INFORMACIÓN: ERROR:com.pi4j.io.exception.IOException: PIGPIO NOT INITIALIZED; make sure you call the PiGpio::initialize() function first.
